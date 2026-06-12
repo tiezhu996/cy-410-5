@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>非遗项目普查统计报告</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 32px; color: #1f2937; }
+    table { border-collapse: collapse; width: 100%; margin: 16px 0 32px; }
+    th, td { border: 1px solid #d1d5db; padding: 8px 10px; text-align: left; }
+    th { background: #f3f4f6; }
+    #chart { height: 360px; margin-top: 24px; }
+  </style>
+  {% if charts %}<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>{% endif %}
+</head>
+<body>
+  <h1>非遗项目普查统计报告</h1>
+  <h2>按类别统计</h2>
+  <table>
+    <tr>{% for header in category.headers %}<th>{{ header }}</th>{% endfor %}</tr>
+    {% for row in category.rows %}<tr>{% for value in row %}<td>{{ value }}</td>{% endfor %}</tr>{% endfor %}
+  </table>
+  <h2>按地区统计</h2>
+  <table>
+    <tr>{% for header in region.headers %}<th>{{ header }}</th>{% endfor %}</tr>
+    {% for row in region.rows %}<tr>{% for value in row %}<td>{{ value }}</td>{% endfor %}</tr>{% endfor %}
+  </table>
+  {% if charts %}
+  <div id="chart"></div>
+  <script>
+    const chart = echarts.init(document.getElementById('chart'));
+    chart.setOption({
+      title: { text: '类别分布' },
+      tooltip: {},
+      xAxis: { type: 'category', data: {{ category.rows | map(attribute=0) | list | tojson }} },
+      yAxis: { type: 'value' },
+      series: [{ type: 'bar', data: {{ category.rows | map(attribute=1) | list | tojson }} }]
+    });
+  </script>
+  {% endif %}
+</body>
+</html>

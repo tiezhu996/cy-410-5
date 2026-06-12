@@ -1,0 +1,18 @@
+[project]
+name = "heritage-census-processor"
+version = "0.1.0"
+description = "非遗项目普查数据处理器"
+requires-python = ">=3.11"
+dependencies = [
+  "click>=8.1",
+  "pandas>=2.0",
+  "openpyxl>=3.1",
+  "rich>=13.0",
+  "jinja2>=3.1"
+]
+
+[project.scripts]
+heritage = "src.cli:cli"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
