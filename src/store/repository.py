@@ -35,7 +35,7 @@ class HeritageRepository:
             for expression in where:
                 if ">=" in expression:
                     field, value = expression.split(">=", 1)
-                    clauses.append(f"{field.strip()} > ?")
+                    clauses.append(f"{field.strip()} >= ?")
                     params.append(value.strip())
                 elif "=" in expression:
                     field, value = expression.split("=", 1)

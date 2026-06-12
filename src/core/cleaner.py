@@ -28,7 +28,7 @@ class DataCleaner:
             if not row.get("endangerment"):
                 row["endangerment"] = "一般"
                 defaults_filled += 1
-            if row.get("inheritor_age") and (int(row["inheritor_age"]) <= 0 or int(row["inheritor_age"]) >= 120):
+            if row.get("inheritor_age") and (int(row["inheritor_age"]) <= 0 or int(row["inheritor_age"]) > 120):
                 row["is_anomaly"] = 1
                 anomalies += 1
             if row.get("endangerment") not in ENDANGERMENT_LEVELS:

@@ -14,7 +14,7 @@ class DataImporter:
         path = Path(file)
         if not path.exists():
             raise FileNotFoundError(file)
-        detected = file_format or ("excel" if path.suffix.lower() == ".xlsx" else "csv")
+        detected = file_format or ("excel" if path.suffix.lower() in (".xlsx", ".xls") else "csv")
         if detected == "excel":
             frame = pd.read_excel(path)
         else:

@@ -18,7 +18,7 @@ class DataExporter:
             Path(output).write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
         elif output_format == "sqlite":
             target = HeritageRepository(output)
-            target.insert_frame(frame.drop(columns=["id", "created_at", "updated_at"], errors="ignore"), incremental=True)
+            target.insert_frame(frame.drop(columns=["id", "created_at", "updated_at"], errors="ignore"), incremental=False)
         else:
             frame.to_csv(output, index=False)
         return len(rows)
